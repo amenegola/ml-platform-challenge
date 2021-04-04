@@ -15,6 +15,11 @@ variable "kinesis_firehose_stream_name" {
   type        = string
 }
 
+variable "kinesis_firehose_stream_role" {
+  description = "Kinesis firehose role arn"
+  type        = string
+}
+
 variable "raw_bucket_name" {
   description = "The bucket name"
   type        = string
@@ -26,11 +31,6 @@ variable "kinesis_stream_arn" {
 }
 
 variable "kinesis_role_arn" {
-  description = "Kinesis stream role arn"
-  type        = string
-}
-
-variable "kinesis_firehose_stream_role" {
   description = "Kinesis stream role arn"
   type        = string
 }

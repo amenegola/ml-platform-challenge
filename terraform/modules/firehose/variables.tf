@@ -26,9 +26,11 @@ variable "kinesis_firehose_stream_role_name" {
 variable "buffer_size" {
   description = "Firehose buffer size"
   type        = number
+  default = 1
 }
 
 variable "buffer_interval" {
   description = "Firehose buffer interval"
   type        = number
+  default = 60
 }
