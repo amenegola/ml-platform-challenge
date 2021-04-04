@@ -1,14 +1,3 @@
-variable "region" {
-  type    = string
-  default = "us-east-1"
-}
-
-variable "prod_prefix" {
-  type    = string
-  default = "prod"
-}
-
-variable "dev_prefix" {
-  type    = string
-  default = "dev"
-}
+region  = "us-east-2"
+prod_prefix = "prod"
+dev_prefix  = "dev"
