@@ -14,5 +14,5 @@ module "kinesis_stream" {
   source = "../../modules/kinesis"
 
   name = var.kinesis_stream_name
-  tags = var.tags
+  tags = var.kinesis_tags
 }
