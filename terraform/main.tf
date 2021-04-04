@@ -25,6 +25,26 @@ resource "aws_kinesis_stream" "dev" {
   }
 }
 
+resource "aws_iam_role" "kinesis_role" {
+  name = "kinesis_role-${var.dev_prefix}"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "kinesis.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
 resource "aws_s3_bucket" "raw_dev" {
   bucket = "random-beer-raw-${var.dev_prefix}"
   acl    = "private"
@@ -56,7 +76,7 @@ resource "aws_kinesis_firehose_delivery_stream" "raw_stream" {
 
   kinesis_source_configuration {
     kinesis_stream_arn = aws_kinesis_stream.dev.arn
-    role_arn           = aws_iam_role.firehose_role.arn
+    role_arn           = aws_iam_role.kinesis_role.arn
   }
   
   s3_configuration {
