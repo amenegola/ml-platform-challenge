@@ -15,7 +15,7 @@ variable "kinesis_firehose_stream_name" {
   type        = string
 }
 
-variable "kinesis_firehose_stream_role" {
+variable "kinesis_firehose_stream_role_name" {
   description = "Kinesis firehose role arn"
   type        = string
 }
