@@ -17,7 +17,7 @@ module "kinesis_stream" {
   tags = var.kinesis_tags
 }
 
-module "kinesis-firehose-raw" {
+module "kinesis_firehose_raw" {
   source                                = "../../modules/firehose"
   
   kinesis_firehose_stream_name          = var.kinesis_firehose_stream_name
