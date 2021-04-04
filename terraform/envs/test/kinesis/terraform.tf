@@ -11,7 +11,7 @@ provider "aws" {
 }
 
 module "kinesis_stream" {
-  source = "../../"
+  source = "../../../modules/kinesis"
 
   name                      = var.name
   shard_count               = var.shard_count
