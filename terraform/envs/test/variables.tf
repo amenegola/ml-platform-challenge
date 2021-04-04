@@ -15,7 +15,7 @@ variable "kinesis_firehose_stream_name" {
   type        = string
 }
 
-variable "bucket_name" {
+variable "raw_bucket_name" {
   description = "The bucket name"
   type        = string
 }
