@@ -24,5 +24,4 @@ module "kinesis_firehose_raw" {
   kinesis_firehose_stream_role_name     = var.kinesis_firehose_stream_role_name
   bucket_name                           = var.raw_bucket_name
   kinesis_stream_arn                    = module.kinesis_stream.kinesis_stream_arn
-  kinesis_role_arn                      = module.kinesis_stream.kinesis_stream_iam_policy_read_only_arn
 }
