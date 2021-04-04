@@ -35,7 +35,7 @@ resource "aws_iam_policy" "policy" {
           "kinesis:GetRecords",
           "kinesis:ListShards"
       ],
-      "Resource": "arn:aws:kinesis:us-east-2:741183806697:stream/random-beer-data-stream"
+      "Resource": "arn:aws:kinesis:us-east-2:741183806697:stream/random-beer-data-stream-dev"
     }
   ]
 }
