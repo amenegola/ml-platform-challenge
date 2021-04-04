@@ -1,18 +1,32 @@
-data "aws_iam_policy_document" "kinesis_firehose_stream_assume_role" {
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
+resource "aws_iam_role" "firehose_role" {
+  name  = var.kinesis_firehose_stream_role_name
 
-    principals {
-      type        = "Service"
-      identifiers = ["firehose.amazonaws.com"]
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "firehose.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    },
+    {
+            "Sid": "",
+            "Effect": "Allow",
+            "Action": [
+                "kinesis:DescribeStream",
+                "kinesis:GetShardIterator",
+                "kinesis:GetRecords",
+                "kinesis:ListShards"
+            ],
+            "Resource": "arn:aws:kinesis:us-east-2:741183806697:stream/random-beer-data-stream"
     }
-  }
+  ]
 }
-
-resource "aws_iam_role" "kinesis_firehose_stream_role" {
-  name               = var.kinesis_firehose_stream_role_name
-  assume_role_policy = data.aws_iam_policy_document.kinesis_firehose_stream_assume_role.json
+EOF
 }
 
 resource "aws_s3_bucket" "bucket" {
