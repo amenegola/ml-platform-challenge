@@ -18,33 +18,22 @@ resource "aws_iam_role" "firehose_role" {
 EOF
 }
 
-resource "aws_iam_policy" "policy" {
-  name        = "test-policy"
-  description = "A test policy"
+resource "aws_iam_role_policy" "firehose-stream-policy" {
+  name = "firehose-stream-policy"
+  role = aws_iam_role.firehose_role.name
 
-  policy = <<EOF
+ policy = <<EOF
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "",
-      "Effect": "Allow",
-      "Action": [
-          "kinesis:DescribeStream",
-          "kinesis:GetShardIterator",
-          "kinesis:GetRecords",
-          "kinesis:ListShards"
-      ],
-      "Resource": "arn:aws:kinesis:us-east-2:741183806697:stream/random-beer-data-stream-dev"
-    }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+       {
+            "Effect": "Allow",
+            "Action": "kinesis:*",
+            "Resource": "*"
+        }
+    ]
 }
 EOF
-}
-
-resource "aws_iam_role_policy_attachment" "test-attach" {
-  role       = aws_iam_role.firehose_role.name
-  policy_arn = aws_iam_policy.policy.arn
 }
 
 resource "aws_s3_bucket" "bucket" {
