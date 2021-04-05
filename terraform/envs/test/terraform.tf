@@ -10,6 +10,14 @@ provider "aws" {
   region = var.region
 }
 
+module "trigger" {
+  source                     = "../../modules/cloudwatch"
+
+  lambda_arn                 = module.lambda_get_data.lambda_arn
+  lambda_function_name       = var.lambda_get_data_nam
+  lambda_schedule_expression = 
+}
+
 module "lambda_get_data" {
   source      = "../../modules/lambda"
 

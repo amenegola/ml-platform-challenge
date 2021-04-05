@@ -2,6 +2,10 @@ variable "region" {
   type    = string
 }
 
+variable "lambda_schedule_expression" {
+  description = "Lambda schedule expression. Defaults to every 5 minutes"
+}
+
 variable "kinesis_stream_name" {
   type    = string
 }

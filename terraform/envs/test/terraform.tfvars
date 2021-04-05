@@ -1,5 +1,7 @@
 region  = "us-east-2"
 
+lambda_schedule_expression = "rate(5 minutes)"
+
 lambda_get_data_name        = "get-random-beer-dev"
 lambda_get_data_source_path = "../../../lambda_sources/get-random-beer"
 lambda_get_data_handler     = "main.query_beer"
