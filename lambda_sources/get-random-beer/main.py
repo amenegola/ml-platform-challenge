@@ -15,6 +15,6 @@ def query_beer(event, context):
         
     # write the data to the stream
     put_response = k_client.put_record(
-                StreamName=STREAM_NAM,
+                StreamName=STREAM_NAME,
                 Data=r.text,
                 PartitionKey='shard-1')
