@@ -73,8 +73,4 @@ resource "aws_lambda_function" "source" {
   environment {
     variables = var.environment_variables
   }
-
-  lifecycle {
-    ignore_changes = [source_code_hash, last_modified]
-  }
 }
