@@ -10,17 +10,32 @@ variable "kinesis_tags" {
   type    = map
 }
 
-variable "kinesis_firehose_stream_name" {
+variable "firehose_name_raw" {
   description = "Name to be use on kinesis firehose stream"
   type        = string
 }
 
-variable "kinesis_firehose_stream_role_name" {
+variable "firehose_role_name_raw" {
   description = "Kinesis firehose role arn"
   type        = string
 }
 
-variable "raw_bucket_name" {
+variable "bucket_raw" {
+  description = "The bucket name"
+  type        = string
+}
+
+variable "firehose_name_clean" {
+  description = "Name to be use on kinesis firehose stream"
+  type        = string
+}
+
+variable "firehose_role_name_clean" {
+  description = "Kinesis firehose role arn"
+  type        = string
+}
+
+variable "bucket_clean" {
   description = "The bucket name"
   type        = string
 }

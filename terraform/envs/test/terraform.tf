@@ -28,9 +28,9 @@ module "kinesis_stream" {
 module "kinesis_firehose_raw" {
   source                            = "../../modules/firehose"
   
-  kinesis_firehose_stream_name      = var.kinesis_firehose_stream_name
-  kinesis_firehose_stream_role_name = var.kinesis_firehose_stream_role_name
-  bucket_name                       = var.raw_bucket_name
+  kinesis_firehose_stream_name      = var.firehose_name_raw
+  kinesis_firehose_stream_role_name = var.firehose_role_name_raw
+  bucket_name                       = var.bucket_raw
   kinesis_stream_arn                = module.kinesis_stream.kinesis_stream_arn
 }
 
@@ -45,9 +45,9 @@ module "lambda_clean_data" {
 module "kinesis_firehose_clean_data" {
   source                            = "../../modules/firehose"
   
-  kinesis_firehose_stream_name      = var.kinesis_firehose_stream_name
-  kinesis_firehose_stream_role_name = var.kinesis_firehose_stream_role_name
-  bucket_name                       = var.raw_bucket_name
+  kinesis_firehose_stream_name      = var.firehose_name_clean
+  kinesis_firehose_stream_role_name = var.firehose_role_name_clean
+  bucket_name                       = var.bucket_clean
   kinesis_stream_arn                = module.kinesis_stream.kinesis_stream_arn
   create_data_transformation        = true
   lambda_processor_arn              = module.lambda_clean_data.lambda_arn
