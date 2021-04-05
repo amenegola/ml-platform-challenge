@@ -27,6 +27,8 @@ module "kinesis_firehose_raw" {
 }
 
 module "lambda_get_data" {
+  source      = "../../modules/lambda"
+
   name        = var.lambda_get_data_name
   source_path = var.lambda_get_data_source_path
   handler     = var.lambda_get_data_handler
