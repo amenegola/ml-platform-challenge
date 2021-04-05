@@ -8,11 +8,11 @@ kinesis_stream_name = "random-beer-data-stream-dev"
 kinesis_tags        = {Environment = "test"}
 
 firehose_name_raw      = "registry-raw-data-dev"
-firehose_role_name_raw = "kinesis_firehose_stream_role_dev" 
+firehose_role_name_raw = "firehose_role_raw_dev" 
 bucket_raw             = "random-beer-raw-dev" 
 
-firehose_name_clean      = "registry-raw-data-dev"
-firehose_role_name_clean = "kinesis_firehose_stream_role_dev" 
+firehose_name_clean      = "clean-data-dev"
+firehose_role_name_clean = "firehose_role_clean_data_dev" 
 bucket_clean             = "random-beer-cleaned-dev"
 
 lambda_clean_data_name        = "clean-data-dev"
