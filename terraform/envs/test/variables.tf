@@ -24,3 +24,18 @@ variable "raw_bucket_name" {
   description = "The bucket name"
   type        = string
 }
+
+variable "lambda_get_data_name" {
+  description = "Function name"
+  type        = string
+}
+
+variable "lambda_get_data_source_path" {
+  description = "Path to function source code"
+  type        = string
+}
+
+variable "lambda_get_data_handler" {
+  description = "Handler for function call"
+  type        = string
+}

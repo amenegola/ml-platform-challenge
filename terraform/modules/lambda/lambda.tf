@@ -1,20 +1,20 @@
 # codes for pip install and zip packaging
 resource "null_resource" "pip" {
   triggers {
-    main         = "${base64sha256(file("${path.module}/source/main.py"))}"
-    requirements = "${base64sha256(file("${path.module}/source/requirements.txt"))}"
-    execute      = "${base64sha256(file("${path.module}/pip.sh"))}"
+    main         = "${base64sha256(file("${var.source_path}/main.py"))}"
+    requirements = "${base64sha256(file("${var.source_path}/requirements.txt"))}"
+    execute      = "${base64sha256(file("pip.sh"))}"
   }
 
   provisioner "local-exec" {
-    command = "${path.module}/pip.sh ${path.module}/source"
+    command = "${var.source_path}/pip.sh ${var.source_path}/source"
   }
 }
 
 data "archive_file" "source" {
   type        = "zip"
-  source_dir  = "${path.module}/source"
-  output_path = "${path.module}/source.zip"
+  source_dir  = "${var.source_path}"
+  output_path = "${var.source_path}/source.zip"
 
   depends_on = ["null_resource.pip"]
 }
@@ -41,18 +41,18 @@ EOF
 }
 
 resource "aws_lambda_function" "source" {
-  filename         = "${path.module}/source.zip"
+  filename         = "${var.source_path}/source.zip"
   source_code_hash = "${data.archive_file.source.output_base64sha256}"
-  function_name    = "lamda"
-  role             = "${aws_iam_role.lambda.arn}"
-  handler          = "main.handler"
-  runtime          = "python2.7"
-  timeout          = 120
-  publish          = true
+  function_name    = var.function_name
+  role             = aws_iam_role.lambda.arn
+  handler          = var.handler
+  runtime          = var.runtime "python2.7"
+  timeout          = var.timeout 120
+  publish          = var.publish true
 
   environment {
     variables = {
-      HASH = "${base64sha256(file("source/main.py"))}-${base64sha256(file("source/requirements.txt"))}"
+      HASH = "${base64sha256(file("main.py"))}-${base64sha256(file("requirements.txt"))}"
     }
   }
 
