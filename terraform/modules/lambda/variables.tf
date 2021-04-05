@@ -36,3 +36,9 @@ variable "create_kinesis_policy" {
   type        = bool
   default     = false
 }
+
+variable "environment_variables" {
+  description = "Environment variables for lambda function"
+  type        = map
+  default     = {}
+}

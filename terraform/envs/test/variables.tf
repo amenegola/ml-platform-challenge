@@ -12,6 +12,11 @@ variable "lambda_schedule_expression" {
   type = string
 }
 
+variable "environment_variables" {
+  description = "Environment variables for lambda function"
+  type        = map
+}
+
 variable "create_kinesis_policy" {
   description = "Create policy to enable lambda to publish at kinesis"
   type        = bool

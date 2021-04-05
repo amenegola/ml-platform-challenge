@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
+import os
 import boto3
 import json
 import requests
 
 url = 'https://api.punkapi.com/v2/beers/random'
-stream_name = 'random-beer-data-stream'
+STREAM_NAME = os.getenv('STREAM_NAME')
 k_client = boto3.client('kinesis')
 
 def query_beer(event, context):
@@ -14,6 +15,6 @@ def query_beer(event, context):
         
     # write the data to the stream
     put_response = k_client.put_record(
-                StreamName=stream_name,
+                StreamName=STREAM_NAME,
                 Data=r.text,
                 PartitionKey='shard-1')

@@ -71,9 +71,7 @@ resource "aws_lambda_function" "source" {
   publish          = var.publish
 
   environment {
-    variables = {
-      HASH = "${base64sha256(file("${var.source_path}/main.py"))}-${base64sha256(file("${var.source_path}/requirements.txt"))}"
-    }
+    variables = var.environment_variables
   }
 
   lifecycle {

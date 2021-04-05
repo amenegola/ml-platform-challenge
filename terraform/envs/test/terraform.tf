@@ -26,6 +26,7 @@ module "lambda_get_data" {
   source_path           = var.lambda_get_data_source_path
   handler               = var.lambda_get_data_handler
   create_kinesis_policy = var.create_kinesis_policy
+  environment_variables = var.environment_variables
 }
 
 module "kinesis_stream" {
