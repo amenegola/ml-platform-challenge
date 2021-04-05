@@ -66,6 +66,11 @@ resource "aws_kinesis_firehose_delivery_stream" "extended_s3_stream" {
   name        = var.kinesis_firehose_stream_name
   destination = "extended_s3"
 
+  kinesis_source_configuration {
+    kinesis_stream_arn = var.kinesis_stream_arn
+    role_arn           = aws_iam_role.firehose_role.arn
+  }
+  
   extended_s3_configuration {
     role_arn   = aws_iam_role.firehose_role.arn
     bucket_arn = aws_s3_bucket.bucket.arn
