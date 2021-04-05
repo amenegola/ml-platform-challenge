@@ -46,9 +46,9 @@ resource "aws_lambda_function" "source" {
   function_name    = var.function_name
   role             = aws_iam_role.lambda.arn
   handler          = var.handler
-  runtime          = var.runtime "python2.7"
-  timeout          = var.timeout 120
-  publish          = var.publish true
+  runtime          = var.runtime
+  timeout          = var.timeout
+  publish          = var.publish
 
   environment {
     variables = {
