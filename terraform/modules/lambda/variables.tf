@@ -40,5 +40,7 @@ variable "create_kinesis_policy" {
 variable "environment_variables" {
   description = "Environment variables for lambda function"
   type        = map
-  default     = {}
+  default     = {
+      HASH = "${base64sha256(file("${source_path}/main.py"))}-${base64sha256(file("${source_path}/requirements.txt"))}"
+    }
 }
