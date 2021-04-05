@@ -1,9 +1,9 @@
 # codes for pip install and zip packaging
 resource "null_resource" "pip" {
   triggers = {
-    main         = base64sha256(file("${var.source_path}/main.py"))}
-    requirements = base64sha256(file("${var.source_path}/requirements.txt"))}
-    execute      = base64sha256(file("pip.sh"))}
+    main         = base64sha256(file("${var.source_path}/main.py"))
+    requirements = base64sha256(file("${var.source_path}/requirements.txt"))
+    execute      = base64sha256(file("pip.sh"))
   }
 
   provisioner "local-exec" {
