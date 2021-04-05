@@ -52,7 +52,7 @@ resource "aws_lambda_function" "source" {
 
   environment {
     variables = {
-      HASH = "${base64sha256(file("${var.source_path}/main.py"))}-${base64sha256(file("var.source_path}/requirements.txt"))}"
+      HASH = "${base64sha256(file("${var.source_path}/main.py"))}-${base64sha256(file("${var.source_path}/requirements.txt"))}"
     }
   }
 
