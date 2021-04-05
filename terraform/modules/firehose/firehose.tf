@@ -19,7 +19,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "firehose-stream-policy" {
-  name = "firehose-stream-policy"
+  name = var.kinesis_firehose_stream_name
   role = aws_iam_role.firehose_role.name
 
  policy = <<EOF
@@ -30,7 +30,22 @@ resource "aws_iam_role_policy" "firehose-stream-policy" {
             "Effect": "Allow",
             "Action": "kinesis:*",
             "Resource": "*"
-        }
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+              "s3:AbortMultipartUpload",
+              "s3:GetBucketLocation",
+              "s3:GetObject",
+              "s3:ListBucket",
+              "s3:ListBucketMultipartUploads",
+              "s3:PutObject"
+          ],
+          "Resource": [
+              "arn:aws:s3:::${var.bucket_name}",
+              "arn:aws:s3:::${var.bucket_name}/*"
+          ]
+      }
     ]
 }
 EOF
