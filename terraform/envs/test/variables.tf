@@ -39,3 +39,18 @@ variable "lambda_get_data_handler" {
   description = "Handler for function call"
   type        = string
 }
+
+variable "lambda_clean_data_name" {
+  description = "Function name"
+  type        = string
+}
+
+variable "lambda_clean_data_source_path" {
+  description = "Path to function source code"
+  type        = string
+}
+
+variable "lambda_clean_data_handler" {
+  description = "Handler for function call"
+  type        = string
+}

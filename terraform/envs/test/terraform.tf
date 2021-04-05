@@ -10,6 +10,14 @@ provider "aws" {
   region = var.region
 }
 
+module "lambda_get_data" {
+  source      = "../../modules/lambda"
+
+  name        = var.lambda_get_data_name
+  source_path = var.lambda_get_data_source_path
+  handler     = var.lambda_get_data_handler
+}
+
 module "kinesis_stream" {
   source = "../../modules/kinesis"
 
@@ -26,10 +34,21 @@ module "kinesis_firehose_raw" {
   kinesis_stream_arn                = module.kinesis_stream.kinesis_stream_arn
 }
 
-module "lambda_get_data" {
+module "lambda_clean_data" {
   source      = "../../modules/lambda"
 
-  name        = var.lambda_get_data_name
-  source_path = var.lambda_get_data_source_path
-  handler     = var.lambda_get_data_handler
+  name        = var.lambda_clean_data_name
+  source_path = var.lambda_clean_data_source_path
+  handler     = var.lambda_clean_data_handler
+}
+
+module "kinesis_firehose_clean_data" {
+  source                            = "../../modules/firehose"
+  
+  kinesis_firehose_stream_name      = var.kinesis_firehose_stream_name
+  kinesis_firehose_stream_role_name = var.kinesis_firehose_stream_role_name
+  bucket_name                       = var.raw_bucket_name
+  kinesis_stream_arn                = module.kinesis_stream.kinesis_stream_arn
+  create_data_transformation        = true
+  lambda_processor_arn              = module.lambda_clean_data.lambda_arn
 }

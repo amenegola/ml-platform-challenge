@@ -42,6 +42,8 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_kinesis_firehose_delivery_stream" "firehose_stream" {
+  count = var.create_data_transformation == false ? 1 : 0
+
   name        = var.kinesis_firehose_stream_name
   destination = "s3"
 
@@ -55,5 +57,30 @@ resource "aws_kinesis_firehose_delivery_stream" "firehose_stream" {
     bucket_arn      = aws_s3_bucket.bucket.arn
     buffer_size     = var.buffer_size
     buffer_interval = var.buffer_interval
+  }
+}
+
+resource "aws_kinesis_firehose_delivery_stream" "extended_s3_stream" {
+  count = var.create_data_transformation == true ? 1 : 0
+
+  name        = var.kinesis_firehose_stream_name
+  destination = "extended_s3"
+
+  extended_s3_configuration {
+    role_arn   = aws_iam_role.firehose_role.arn
+    bucket_arn = aws_s3_bucket.bucket.arn
+
+    processing_configuration {
+      enabled = "true"
+
+      processors {
+        type = "Lambda"
+
+        parameters {
+          parameter_name  = "LambdaArn"
+          parameter_value = "${var.lambda_processor_arn}:$LATEST"
+        }
+      }
+    }
   }
 }

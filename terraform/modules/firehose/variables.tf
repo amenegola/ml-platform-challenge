@@ -29,3 +29,15 @@ variable "buffer_interval" {
   type        = number
   default = 60
 }
+
+variable "create_data_transformation" {
+  description = "Switch to create a Firehose stream with data transformation function"
+  type        = bool
+  default = false
+}
+
+variable "lambda_processor_arn" {
+  description = "ARN for the lambda data transformation function"
+  type        = string
+  default = ""
+}
