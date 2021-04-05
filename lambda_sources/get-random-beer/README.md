@@ -1,5 +1,3 @@
-## 
+## get-random-beer - Lambda
 
-`main.py` is from https://docs.aws.amazon.com/lambda/latest/dg/vpc-rds.html
-
-This lambda function (main.py) doesn't work directly, please replace with yours
+This Lambda is used to query a random beer from [Punk API](https://punkapi.com/documentation/v2) and send it to a Kinesis Stream.

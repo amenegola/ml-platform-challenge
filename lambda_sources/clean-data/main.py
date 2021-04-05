@@ -1,50 +1,20 @@
 #!/usr/bin/env python
 
-import sys
-import logging
-import rds_config
-import pymysql
+import base64
+import json
 
-# rds settings
-rds_host = "rds_config.db_endpoint"
-name = rds_config.db_username
-password = rds_config.db_password
-db_name = rds_config.db_name
+keys = ['id','name','abv','ibu','target_fg','target_og','ebc','srm','ph']
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-try:
-    conn = pymysql.connect(
-        rds_host, user=name, passwd=password, db=db_name, connect_timeout=5)
-except BaseException:
-    logger.error(
-        "ERROR: Unexpected error: Could not connect to MySql instance.")
-    sys.exit()
-
-logger.info("SUCCESS: Connection to RDS mysql instance succeeded")
-
-
-def handler(event, context):
-    """
-    This function fetches content from mysql RDS instance
-    """
-
-    item_count = 0
-
-    with conn.cursor() as cur:
-        cur.execute(
-            "create table Employee3 ( EmpID  int NOT NULL, Name varchar(255) NOT NULL, PRIMARY KEY (EmpID))"
-        )
-        cur.execute('insert into Employee3 (EmpID, Name) values(1, "Joe")')
-        cur.execute('insert into Employee3 (EmpID, Name) values(2, "Bob")')
-        cur.execute('insert into Employee3 (EmpID, Name) values(3, "Mary")')
-        conn.commit()
-        cur.execute("select * from Employee3")
-        for row in cur:
-            item_count += 1
-            logger.info(row)
-            # print(row)
-    conn.commit()
-
-    return "Added %d items from RDS MySQL table" % (item_count)
+def clean_data(event, context):
+    output = []
+    for record in event['records']:
+        payload = base64.b64decode(record["data"])
+        data = json.loads(payload)[0]
+        data_cleaned = { key: data[key] for key in keys }
+        output_record = {
+            'recordId': record['recordId'],
+            'result': 'Ok',
+            'data': base64.b64encode(json.dumps(data_cleaned).encode('utf-8')).decode('utf-8')
+        }
+        output.append(output_record)
+    return {'records': output}
