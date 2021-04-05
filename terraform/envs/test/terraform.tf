@@ -17,6 +17,7 @@ module "trigger" {
   lambda_arn                 = module.lambda_get_data.lambda_arn
   lambda_function_name       = var.lambda_get_data_name
   lambda_schedule_expression = var.lambda_schedule_expression
+  create_kinesis_policy      = var.create_kinesis_policy
 }
 
 module "lambda_get_data" {

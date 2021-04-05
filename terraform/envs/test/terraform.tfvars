@@ -6,6 +6,7 @@ lambda_schedule_expression = "rate(5 minutes)"
 lambda_get_data_name        = "get-random-beer-dev"
 lambda_get_data_source_path = "../../../lambda_sources/get-random-beer"
 lambda_get_data_handler     = "main.query_beer"
+create_kinesis_policy       = true
 
 kinesis_stream_name = "random-beer-data-stream-dev"
 kinesis_tags        = {Environment = "test"}

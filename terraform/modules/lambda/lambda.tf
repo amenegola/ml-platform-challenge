@@ -40,6 +40,26 @@ resource "aws_iam_role" "lambda" {
 EOF
 }
 
+resource "aws_iam_role_policy" "lambda-kinesis-policy" {
+  count = var.create_kinesis_policy == true ? 1 : 0
+
+  name = "${var.name}_policy"
+  role = aws_iam_role.lambda.name
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+       {
+            "Effect": "Allow",
+            "Action": "kinesis:*",
+            "Resource": "*"
+        }
+    ]
+}
+EOF
+}
+
 resource "aws_lambda_function" "source" {
   filename         = "${var.source_path}/source.zip"
   source_code_hash = data.archive_file.source.output_base64sha256

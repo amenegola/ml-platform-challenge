@@ -30,3 +30,9 @@ variable "publish" {
   type        = bool
   default     = true
 }
+
+variable "create_kinesis_policy" {
+  description = "Create policy to enable lambda to publish at kinesis"
+  type        = bool
+  default     = false
+}

@@ -9,6 +9,12 @@ variable "cloudwatch_rule_name" {
 
 variable "lambda_schedule_expression" {
   description = "Lambda schedule expression. Defaults to every 5 minutes"
+  type = string
+}
+
+variable "create_kinesis_policy" {
+  description = "Create policy to enable lambda to publish at kinesis"
+  type        = bool
 }
 
 variable "kinesis_stream_name" {
