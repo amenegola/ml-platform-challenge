@@ -7,7 +7,7 @@ resource "null_resource" "pip" {
   }
 
   provisioner "local-exec" {
-    command = "${var.source_path}/pip.sh ${var.source_path}/source"
+    command = "${path.module}/pip.sh ${var.source_path}"
   }
 }
 
