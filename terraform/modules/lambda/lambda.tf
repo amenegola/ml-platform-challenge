@@ -3,7 +3,7 @@ resource "null_resource" "pip" {
   triggers = {
     main         = base64sha256(file("${var.source_path}/main.py"))
     requirements = base64sha256(file("${var.source_path}/requirements.txt"))
-    execute      = base64sha256(file("pip.sh"))
+    execute      = base64sha256(file("${path.module}/pip.sh"))
   }
 
   provisioner "local-exec" {
