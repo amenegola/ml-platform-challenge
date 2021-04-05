@@ -21,7 +21,7 @@ data "archive_file" "source" {
 
 # codes for lambda functions
 resource "aws_iam_role" "lambda" {
-  name = "iam_for_lambda"
+  name = var.name
 
   assume_role_policy = <<EOF
 {
