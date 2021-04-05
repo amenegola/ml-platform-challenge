@@ -42,7 +42,7 @@ EOF
 
 resource "aws_lambda_function" "source" {
   filename         = "${var.source_path}/source.zip"
-  source_code_hash = data.archive_file.source.output_base64sha256}
+  source_code_hash = data.archive_file.source.output_base64sha256
   function_name    = var.function_name
   role             = aws_iam_role.lambda.arn
   handler          = var.handler
