@@ -1,5 +1,6 @@
 region  = "us-east-2"
 
+aws_cloudwatch_rule_name = "start-beer-collection-dev"
 lambda_schedule_expression = "rate(5 minutes)"
 
 lambda_get_data_name        = "get-random-beer-dev"

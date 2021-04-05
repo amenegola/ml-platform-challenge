@@ -2,6 +2,11 @@ variable "region" {
   type    = string
 }
 
+variable "cloudwatch_rule_name" {
+  description = "Event rule name"
+  type = string
+}
+
 variable "lambda_schedule_expression" {
   description = "Lambda schedule expression. Defaults to every 5 minutes"
 }

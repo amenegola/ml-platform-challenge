@@ -13,6 +13,7 @@ provider "aws" {
 module "trigger" {
   source                     = "../../modules/cloudwatch"
 
+  cloudwatch_rule_name       = var.cloudwatch_rule_name
   lambda_arn                 = module.lambda_get_data.lambda_arn
   lambda_function_name       = var.lambda_get_data_name
   lambda_schedule_expression = var.lambda_schedule_expression
