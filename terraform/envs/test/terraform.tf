@@ -65,10 +65,11 @@ module "kinesis_firehose_clean_data" {
 }
 
 module "glue_random_beer" {
-  source        = "../../modules/glue"
+  source           = "../../modules/glue"
   
-  database_name = var.database_name 
-  table_name    = var.table_name
-  crawler_name  = var.crawler_name
-  bucket_name   = var.bucket_clean
+  database_name    = var.database_name 
+  table_name       = var.table_name
+  crawler_name     = var.crawler_name
+  crawler_schedule = var.crawler_schedule
+  bucket_name      = var.bucket_clean
 }
