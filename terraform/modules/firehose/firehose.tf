@@ -119,6 +119,7 @@ resource "aws_kinesis_firehose_delivery_stream" "extended_s3_stream" {
   extended_s3_configuration {
     role_arn   = aws_iam_role.firehose_role.arn
     bucket_arn = aws_s3_bucket.bucket.arn
+    buffer_size     = var.buffer_size
     buffer_interval = var.buffer_interval
     
     processing_configuration {
@@ -127,10 +128,12 @@ resource "aws_kinesis_firehose_delivery_stream" "extended_s3_stream" {
       processors {
         type = "Lambda"
 
-        parameters {
-          parameter_name  = "LambdaArn"
-          parameter_value = "${var.lambda_processor_arn}:$LATEST"
-        }
+        parameters {[
+          {parameter_name  = "LambdaArn"
+           parameter_value = "${var.lambda_processor_arn}:$LATEST"}
+          {parameter_name  = "BufferSizeInMBs"
+           parameter_value = 1}
+        ]}
       }
     }
   }
