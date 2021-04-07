@@ -128,12 +128,15 @@ resource "aws_kinesis_firehose_delivery_stream" "extended_s3_stream" {
       processors {
         type = "Lambda"
 
-        parameters {[
-          {parameter_name  = "LambdaArn"
-           parameter_value = "${var.lambda_processor_arn}:$LATEST"}
-          {parameter_name  = "BufferSizeInMBs"
-           parameter_value = 1}
-        ]}
+        parameters {
+          parameter_name  = "LambdaArn"
+          parameter_value = "${var.lambda_processor_arn}:$LATEST"
+        }
+
+        parameters {
+          parameter_name  = "BufferSizeInMBs"
+          parameter_value = 1
+        }
       }
     }
   }
