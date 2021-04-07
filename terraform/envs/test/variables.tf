@@ -104,3 +104,8 @@ variable "crawler_name" {
   description = "Glue Crawler name"
   type        = string
 }
+
+variable "crawler_schedule" {
+  description = "Glue Crawler schedule as cron expression"
+  type        = string
+}

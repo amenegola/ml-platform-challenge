@@ -13,6 +13,11 @@ variable "crawler_name" {
   type        = string
 }
 
+variable "crawler_schedule" {
+  description = "Glue Crawler schedule as cron expression"
+  type        = string
+}
+
 variable "bucket_name" {
   description = "Bucket name where data is"
   type        = string
