@@ -56,7 +56,7 @@ EOF
 resource "aws_glue_crawler" "crawler" {
   database_name = aws_glue_catalog_database.aws_glue_catalog_database.name
   name          = var.crawler_name
-  role          = aws_iam_role.glue_role.arn
+  role          = aws_iam_role.glue.arn
 
   s3_target {
     path = "s3://${var.bucket_name}"
