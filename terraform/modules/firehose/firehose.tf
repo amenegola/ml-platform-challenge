@@ -51,6 +51,36 @@ resource "aws_iam_role_policy" "firehose-stream-policy" {
 EOF
 }
 
+resource "aws_iam_policy" "policy" {
+  count = var.create_data_transformation == true ? 1 : 0
+
+  name        = var.kinesis_firehose_stream_name
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+            "Sid": "",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:InvokeFunction",
+                "lambda:GetFunctionConfiguration"
+            ],
+            "Resource": "${var.lambda_processor_arn}:$LATEST"
+        }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "firehose_attach" {
+  count = var.create_data_transformation == true ? 1 : 0
+
+  role       = aws_iam_role.firehose_role.name
+  policy_arn = aws_iam_policy.policy[count.index].arn
+}
+
 resource "aws_s3_bucket" "bucket" {
   bucket = var.bucket_name
   acl    = "private"
