@@ -14,11 +14,11 @@ kinesis_tags        = {Environment = "test"}
 
 firehose_name_raw      = "registry-raw-data-dev"
 firehose_role_name_raw = "firehose_role_raw_dev" 
-bucket_raw             = "random-beer-raw-dev" 
+bucket_raw             = "beer-raw-dev" 
 
 firehose_name_clean      = "clean-data-dev"
 firehose_role_name_clean = "firehose_role_clean_data_dev" 
-bucket_clean             = "random-beer-cleaned-dev"
+bucket_clean             = "beer-cleaned-dev"
 
 lambda_clean_data_name        = "clean-data-dev"
 lambda_clean_data_source_path = "../../../lambda_sources/clean-data"
