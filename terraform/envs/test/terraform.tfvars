@@ -23,3 +23,7 @@ bucket_clean             = "beer-cleaned-dev"
 lambda_clean_data_name        = "clean-data-dev"
 lambda_clean_data_source_path = "../../../lambda_sources/clean-data"
 lambda_clean_data_handler     = "main.clean_data"
+
+database_name = "random-beer-database"
+table_name    = "random-beer-table"
+crawler_name  = "random-beer-crawler"

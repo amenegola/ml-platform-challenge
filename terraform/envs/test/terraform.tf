@@ -63,3 +63,12 @@ module "kinesis_firehose_clean_data" {
   create_data_transformation        = true
   lambda_processor_arn              = module.lambda_clean_data.lambda_arn
 }
+
+module "glue_random_beer" {
+  source        = "../../modules/glue"
+  
+  database_name = var.database_name 
+  table_name    = var.table_name
+  crawler_name  = var.crawler_name
+  bucket_name   = var.bucket_clean
+}
