@@ -4,7 +4,7 @@ resource "aws_glue_catalog_database" "aws_glue_catalog_database" {
 
 resource "aws_glue_catalog_table" "aws_glue_catalog_table" {
   name          = var.table_name
-  database_name = var.database_name
+  database_name = aws_glue_catalog_database.aws_glue_catalog_database.name
 }
 
 resource "aws_iam_role" "glue" {
