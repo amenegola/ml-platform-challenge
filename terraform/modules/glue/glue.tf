@@ -21,5 +21,4 @@ resource "aws_glue_crawler" "crawler" {
 }
 EOF
 }
-}
 
