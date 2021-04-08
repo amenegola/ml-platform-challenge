@@ -11,5 +11,15 @@ resource "aws_glue_crawler" "crawler" {
   s3_target {
     path = "s3://${var.bucket_name}"
   }
+
+  configuration = <<EOF
+{
+  "Version":1.0,
+  "Grouping": {
+    "TableGroupingPolicy": "CombineCompatibleSchemas"
+  }
+}
+EOF
+}
 }
 
