@@ -35,3 +35,7 @@ database_name    = "random-beer-database"
 table_name       = "random-beer-table"
 crawler_name     = "random-beer-crawler"
 crawler_schedule = "cron(0 4 1 * ? *)"
+
+# model bucket
+models_bucket_name = "model-artifacts"
+models_bucket_acl  = "public-read"

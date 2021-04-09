@@ -109,3 +109,13 @@ variable "crawler_schedule" {
   description = "Glue Crawler schedule as cron expression"
   type        = string
 }
+
+variable "models_bucket_name" {
+  description = "Bucket name"
+  type        = string
+}
+
+variable "models_bucket_acl" {
+  description = "ACL bucket"
+  type        = string
+}

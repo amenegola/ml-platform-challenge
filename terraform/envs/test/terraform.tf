@@ -73,3 +73,10 @@ module "glue_random_beer" {
   crawler_schedule = var.crawler_schedule
   bucket_name      = var.bucket_clean
 }
+
+module "s3_model_artifacts" {
+  source      = "../../modules/s3"
+
+  bucket_name = var.models_bucket_name
+  acl         = var.models_bucket_acl
+}
