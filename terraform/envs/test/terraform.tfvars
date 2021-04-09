@@ -37,5 +37,5 @@ crawler_name     = "random-beer-crawler"
 crawler_schedule = "cron(0 4 1 * ? *)"
 
 # model bucket
-models_bucket_name = "model-artifacts"
+models_bucket_name = "beer-model-artifacts"
 models_bucket_acl  = "public-read"
